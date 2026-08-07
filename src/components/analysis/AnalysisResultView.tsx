@@ -55,7 +55,7 @@ export default function AnalysisResultView({ data }: Props) {
   const comparisonData = [
     { name: "Native Female", score: Math.round((data.similarity?.female || 0) * 100), fill: "#8b5cf6" },
     { name: "Native Male", score: Math.round((data.similarity?.male || 0) * 100), fill: "#14b8a6" },
-    { name: "You", score: Math.round(data.overall_score), fill: "#6366f1" },
+    { name: "You", score: Math.round(data.overall_score), fill: "#3b82f6" },
   ];
 
   // Phonemes for selected word
@@ -304,7 +304,7 @@ export default function AnalysisResultView({ data }: Props) {
                   <YAxis domain={['auto', 'auto']} stroke="#64748b" axisLine={false} tickLine={false} tick={{fontSize: 12}} />
                   <Tooltip contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '8px', color: '#0f172a' }} />
                   <Legend verticalAlign="top" height={36} wrapperStyle={{ fontSize: '13px', color: '#64748b' }} />
-                  <Line type="monotone" dataKey="user" name="You" stroke="#6366f1" strokeWidth={2} dot={false} connectNulls />
+                  <Line type="monotone" dataKey="user" name="You" stroke="#3b82f6" strokeWidth={2} dot={false} connectNulls />
                   <Line type="monotone" dataKey="male" name="Native Male" stroke="#14b8a6" strokeWidth={2} strokeDasharray="5 5" dot={false} connectNulls />
                   <Line type="monotone" dataKey="female" name="Native Female" stroke="#8b5cf6" strokeWidth={2} strokeDasharray="5 5" dot={false} connectNulls />
                 </LineChart>
@@ -332,7 +332,7 @@ export default function AnalysisResultView({ data }: Props) {
                    <ZAxis range={[100, 100]} />
                    <Tooltip cursor={{ strokeDasharray: '3 3' }} contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '8px', color: '#0f172a' }} />
                    <Legend verticalAlign="top" height={36} wrapperStyle={{ fontSize: '13px', color: '#64748b' }} />
-                   <Scatter name="You" data={formantData} fill="#6366f1">
+                   <Scatter name="You" data={formantData} fill="#3b82f6">
                     <LabelList dataKey="name" position="top" fill="#64748b" fontSize={11} />
                   </Scatter>
                   <Scatter name="Native Male" data={nativeMaleData} fill="#14b8a6" shape="triangle">

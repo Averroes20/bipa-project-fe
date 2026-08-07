@@ -5,7 +5,7 @@ import { getDatasetStatistics } from "../api/dataset";
 import { FileAudio, Clock, Activity, Zap, PieChart as PieChartIcon } from "lucide-react";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend } from "recharts";
 
-const COLORS = ['#6366f1', '#14b8a6']; // Indigo for Male, Teal for Female
+const COLORS = ['#3b82f6', '#14b8a6']; // Indigo for Male, Teal for Female
 
 export default function Dashboard() {
     const [stats, setStats] = useState<any>(null);
@@ -143,7 +143,7 @@ export default function Dashboard() {
                                             cursor={{fill: '#f8fafc'}}
                                         />
                                         <Legend wrapperStyle={{ fontSize: '12px', color: '#64748b' }} verticalAlign="bottom" height={36} iconType="circle" />
-                                        <Bar yAxisId="left" dataKey="pitch" name="Pitch (Hz)" fill="#6366f1" radius={[4, 4, 4, 4]} maxBarSize={40} />
+                                        <Bar yAxisId="left" dataKey="pitch" name="Pitch (Hz)" fill="#3b82f6" radius={[4, 4, 4, 4]} maxBarSize={40} />
                                         <Bar yAxisId="right" dataKey="energy" name="Energy" fill="#14b8a6" radius={[4, 4, 4, 4]} maxBarSize={40} />
                                     </BarChart>
                                 </ResponsiveContainer>

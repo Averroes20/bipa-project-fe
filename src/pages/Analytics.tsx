@@ -56,7 +56,7 @@ export default function Analytics() {
                          <PolarAngleAxis dataKey="dimension" tick={{ fill: '#64748b', fontSize: 12 }} />
                          <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
                          <Radar name="Native Reference" dataKey="Native Reference" stroke="#14b8a6" fill="#14b8a6" fillOpacity={0.3} />
-                         <Radar name="You" dataKey="You" stroke="#6366f1" fill="#6366f1" fillOpacity={0.6} />
+                         <Radar name="You" dataKey="You" stroke="#3b82f6" fill="#3b82f6" fillOpacity={0.6} />
                          <Tooltip contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '8px' }} itemStyle={{ color: '#0f172a' }} />
                          <Legend wrapperStyle={{ fontSize: 12, paddingTop: '10px', color: '#64748b' }} />
                       </RadarChart>
@@ -77,7 +77,7 @@ export default function Analytics() {
                             <YAxis domain={[0, 100]} stroke="#cbd5e1" tick={{ fill: '#64748b', fontSize: 11 }} width={30} axisLine={false} tickLine={false} />
                             <Tooltip contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', fontSize: 12, borderRadius: '8px' }} itemStyle={{ color: '#0f172a' }} cursor={{fill: '#f8fafc'}} />
                             <Legend wrapperStyle={{ fontSize: 11, paddingTop: '5px', color: '#64748b' }} />
-                            <Bar dataKey="You" fill="#6366f1" radius={[4, 4, 0, 0]} barSize={20} />
+                            <Bar dataKey="You" fill="#3b82f6" radius={[4, 4, 0, 0]} barSize={20} />
                             <Bar dataKey="Native Male" fill="#14b8a6" radius={[4, 4, 0, 0]} barSize={20} />
                             <Bar dataKey="Native Female" fill="#8b5cf6" radius={[4, 4, 0, 0]} barSize={20} />
                           </BarChart>
