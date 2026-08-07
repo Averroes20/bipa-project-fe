@@ -11,6 +11,8 @@ export default function AnalysisResultView({ data }: Props) {
   const [selectedWord, setSelectedWord] = useState<WordAnalysis | null>(null);
   const [showTechnical, setShowTechnical] = useState(false);
 
+  const safeRound = (val: number | null | undefined) => (val !== null && val !== undefined) ? Math.round(val) : "-";
+
   if (!data) return null;
 
   const pitchLen = Math.max(
@@ -27,10 +29,26 @@ export default function AnalysisResultView({ data }: Props) {
   }));
 
   const formantData = data.phonetics?.vowel_space?.length > 0 
-    ? data.phonetics.vowel_space.map(v => ({
+    ? data.phonetics.vowel_space.filter(v => v.f1 !== null && v.f2 !== null).map(v => ({
         f1: v.f1,
         f2: v.f2,
         name: v.vowel
+      }))
+    : [];
+
+  const nativeMaleData = data.phonetics?.native_male_space
+    ? Object.entries(data.phonetics.native_male_space).map(([k, v]) => ({
+        f1: v.f1,
+        f2: v.f2,
+        name: k
+      }))
+    : [];
+
+  const nativeFemaleData = data.phonetics?.native_female_space
+    ? Object.entries(data.phonetics.native_female_space).map(([k, v]) => ({
+        f1: v.f1,
+        f2: v.f2,
+        name: k
       }))
     : [];
 
@@ -124,7 +142,7 @@ export default function AnalysisResultView({ data }: Props) {
                    <Activity size={16} className="text-purple-400" />
                    <span className="font-semibold text-slate-200">Pitch</span>
                 </div>
-                <p className="text-sm text-slate-400">Your average pitch ({Math.round(data.pitch?.mean || 0)} Hz) aligns well with the Native {data.voice_profile} Reference.</p>
+                <p className="text-sm text-slate-400">Your average pitch ({safeRound(data.pitch?.mean)} Hz) aligns well with the Native {data.voice_profile} Reference.</p>
              </div>
              
              <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700/50">
@@ -309,12 +327,20 @@ export default function AnalysisResultView({ data }: Props) {
                <ResponsiveContainer width="100%" height="100%">
                  <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
                    <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
-                   <XAxis type="number" dataKey="f2" name="F2 (Backness)" reversed domain={['auto', 'auto']} stroke="#64748b" />
+                   {/* Reversed Y for F1 (height) and Reversed X for F2 (backness) */}
                    <YAxis type="number" dataKey="f1" name="F1 (Height)" reversed domain={['auto', 'auto']} stroke="#64748b" />
+                   <XAxis type="number" dataKey="f2" name="F2 (Backness)" reversed domain={['auto', 'auto']} stroke="#64748b" />
                    <ZAxis range={[100, 100]} />
                    <Tooltip cursor={{ strokeDasharray: '3 3' }} contentStyle={{ backgroundColor: '#0f172a', borderColor: '#1e293b' }} />
+                   <Legend verticalAlign="top" height={36}/>
                    <Scatter name="Your Voice" data={formantData} fill="#f97316">
-                     <LabelList dataKey="name" position="top" fill="#94a3b8" fontSize={14} fontWeight="bold" />
+                     <LabelList dataKey="name" position="top" fill="#f97316" fontSize={14} fontWeight="bold" />
+                   </Scatter>
+                   <Scatter name="Native Male" data={nativeMaleData} fill="#3b82f6" shape="cross">
+                     <LabelList dataKey="name" position="bottom" fill="#3b82f6" fontSize={12} />
+                   </Scatter>
+                   <Scatter name="Native Female" data={nativeFemaleData} fill="#8b5cf6" shape="diamond">
+                     <LabelList dataKey="name" position="bottom" fill="#8b5cf6" fontSize={12} />
                    </Scatter>
                  </ScatterChart>
                </ResponsiveContainer>
@@ -335,7 +361,7 @@ export default function AnalysisResultView({ data }: Props) {
                </h3>
                <div className="flex items-center gap-6">
                   <div className="w-24 h-24 rounded-full border-4 border-teal-500 flex items-center justify-center flex-shrink-0">
-                     <span className="text-3xl font-bold text-white">{Math.round(data.articulation?.speech_clarity || 0)}</span>
+                     <span className="text-3xl font-bold text-white">{safeRound(data.articulation?.speech_clarity)}</span>
                   </div>
                   <div>
                      <p className="text-lg font-medium text-slate-200 mb-1">

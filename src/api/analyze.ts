@@ -53,12 +53,12 @@ export interface AnalysisResponse {
     errors: any[];
   };
   pitch: {
-    mean: number;
-    range: number;
+    mean: number | null;
+    range: number | null;
     contour: number[];
   };
   energy: {
-    mean: number;
+    mean: number | null;
     contour: number[];
   };
   pause: {
@@ -66,16 +66,18 @@ export interface AnalysisResponse {
     timeline: { start: number; end: number; duration: number }[];
   };
   phonetics: {
-    vowel_space: { vowel: string; f1: number; f2: number; distance_male: number; distance_female: number; accuracy: number }[];
+    vowel_space: { vowel: string; f1: number | null; f2: number | null; distance_male: number; distance_female: number; accuracy: number }[];
+    native_male_space?: Record<string, { f1: number; f2: number }>;
+    native_female_space?: Record<string, { f1: number; f2: number }>;
     formants?: { F1: number; F2: number; F3: number };
     vowels: { vowel: string; accuracy: number }[];
   };
   articulation: {
-    zcr: number;
-    spectral_centroid: number;
-    spectral_bandwidth: number;
-    spectral_contrast: number;
-    speech_clarity: number;
+    zcr: number | null;
+    spectral_centroid: number | null;
+    spectral_bandwidth: number | null;
+    spectral_contrast: number | null;
+    speech_clarity: number | null;
   };
   accent: {
     speaking_rate_wpm: number;
@@ -88,7 +90,7 @@ export interface AnalysisResponse {
   intonation: {
     sentence_ending: string;
     pattern: string;
-    pitch_variance: number;
+    pitch_variance: number | null;
     similarity_score: number;
     user_contour: number[];
     male_contour: number[];
