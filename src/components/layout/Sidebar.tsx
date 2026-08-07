@@ -33,12 +33,12 @@ export default function Sidebar() {
 	const location = useLocation();
 
 	return (
-		<div className="w-64 glass border-r border-slate-800/50 h-screen p-6 flex flex-col fixed z-20">
+		<div className="w-64 bg-white border-r border-slate-200 h-screen p-6 flex flex-col fixed z-20">
 			<div className="mb-10 px-2">
-				<h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent">
+				<h1 className="text-2xl font-bold text-slate-900">
 					BIPA AI
 				</h1>
-				<p className="text-slate-400 text-sm mt-1">
+				<p className="text-slate-500 text-sm mt-1">
 					Speech Analytics CMS
 				</p>
 			</div>
@@ -55,20 +55,20 @@ export default function Sidebar() {
 							className={`
 								flex items-center gap-3
 								px-4 py-3 rounded-xl
-								transition-all duration-300 ease-out
+								transition-all duration-200 ease-out
 								relative overflow-hidden group
 								${
 									active
-										? "bg-blue-600/10 text-blue-400 border border-blue-500/20 shadow-[0_0_15px_rgba(37,99,235,0.15)]"
-										: "text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 border border-transparent"
+										? "bg-blue-50 text-blue-600 font-semibold"
+										: "text-slate-500 hover:text-slate-900 hover:bg-slate-50 font-medium"
 								}
 							`}
 						>
 							<Icon 
                                 size={20} 
-                                className={`transition-transform duration-300 ${active ? 'scale-110' : 'group-hover:scale-110'}`} 
+                                className={`transition-transform duration-200 ${active ? 'scale-105' : 'group-hover:scale-105'}`} 
                             />
-							<span className="font-medium tracking-wide text-sm">{menu.name}</span>
+							<span className="tracking-wide text-sm">{menu.name}</span>
 						</RouterLink>
 					)
 				})}

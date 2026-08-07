@@ -178,30 +178,30 @@ export default function Analyze() {
     <DashboardLayout>
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-white mb-2">Speech Analysis</h1>
-          <p className="text-slate-400">Complete daily tasks or analyze your own custom sentences.</p>
+          <h1 className="text-2xl font-bold text-slate-900 mb-1">Speech Analysis</h1>
+          <p className="text-slate-500 text-sm">Analyze your Indonesian pronunciation and compare it with native speaker references.</p>
         </div>
         <button 
           onClick={handleNewAnalysis}
-          className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white font-medium rounded-xl transition-colors border border-slate-700 flex items-center gap-2 shadow-lg"
+          className="px-4 py-2 bg-white text-slate-700 font-medium rounded-lg transition-colors border border-slate-200 hover:bg-slate-50 flex items-center gap-2 shadow-sm"
         >
           <Plus size={18} /> New Analysis
         </button>
       </div>
       
       {/* Mode Selector */}
-      <div className="flex bg-slate-800/50 p-1 rounded-xl w-max mb-8 border border-slate-700/50">
+      <div className="flex bg-slate-100 p-1 rounded-lg w-max mb-8 border border-slate-200">
           <button 
              onClick={() => toggleMode("guided")}
-             className={`flex items-center gap-2 px-6 py-2.5 rounded-lg transition-all font-medium ${analysisMode === "guided" ? "bg-blue-600 text-white shadow-lg" : "text-slate-400 hover:text-slate-200"}`}
+             className={`flex items-center gap-2 px-6 py-2 rounded-md transition-all font-medium text-sm ${analysisMode === "guided" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-700"}`}
           >
-             <GraduationCap size={18} /> Guided Practice
+             <GraduationCap size={16} /> Guided Practice
           </button>
           <button 
              onClick={() => toggleMode("custom")}
-             className={`flex items-center gap-2 px-6 py-2.5 rounded-lg transition-all font-medium ${analysisMode === "custom" ? "bg-blue-600 text-white shadow-lg" : "text-slate-400 hover:text-slate-200"}`}
+             className={`flex items-center gap-2 px-6 py-2 rounded-md transition-all font-medium text-sm ${analysisMode === "custom" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-700"}`}
           >
-             <PenTool size={18} /> Custom Analysis
+             <PenTool size={16} /> Custom Analysis
           </button>
       </div>
 
@@ -211,46 +211,46 @@ export default function Analyze() {
           
           {analysisMode === "guided" ? (
              recommendedTask ? (
-               <div className="glass rounded-3xl p-6 border border-emerald-500/30 relative overflow-hidden">
-                 <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-bl-full -z-10"></div>
+               <div className="bg-white rounded-xl p-6 border border-emerald-200 relative overflow-hidden shadow-sm">
+                 <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-50 rounded-bl-full -z-10"></div>
                  <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                      <Sparkles size={20} className="text-emerald-400" /> Today's Task
+                    <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+                      <Sparkles size={18} className="text-emerald-500" /> Today's Task
                     </h3>
-                    <span className="bg-slate-800 text-emerald-400 text-xs px-2 py-1 rounded border border-emerald-500/20">{recommendedTask.level}</span>
+                    <span className="bg-emerald-50 text-emerald-600 text-xs px-2 py-1 rounded border border-emerald-100 font-medium">{recommendedTask.level}</span>
                  </div>
                  
                  <div className="space-y-4 mb-6">
                     <div>
-                      <p className="text-slate-400 text-xs uppercase tracking-wider mb-1">Learning Objective</p>
-                      <p className="text-slate-200 text-sm">{recommendedTask.learning_objective}</p>
+                      <p className="text-slate-500 text-xs uppercase tracking-wider mb-1 font-semibold">Learning Objective</p>
+                      <p className="text-slate-700 text-sm">{recommendedTask.learning_objective}</p>
                     </div>
                     <div>
-                      <p className="text-slate-400 text-xs uppercase tracking-wider mb-1">Focus Area</p>
-                      <span className="bg-blue-500/20 text-blue-300 text-xs px-2 py-1 rounded font-medium border border-blue-500/20">
+                      <p className="text-slate-500 text-xs uppercase tracking-wider mb-1 font-semibold">Focus Area</p>
+                      <span className="bg-blue-50 text-blue-600 text-xs px-2 py-1 rounded font-medium border border-blue-100">
                          {recommendedTask.focus_area}
                       </span>
                     </div>
                  </div>
 
-                 <div className="bg-slate-900/50 rounded-xl p-4 border border-slate-700">
-                    <p className="text-slate-400 text-xs uppercase tracking-wider mb-2">Target Sentence</p>
-                    <p className="text-white text-lg font-medium">"{recommendedTask.target_sentence}"</p>
+                 <div className="bg-slate-50 rounded-lg p-4 border border-slate-200">
+                    <p className="text-slate-500 text-xs uppercase tracking-wider mb-2 font-semibold">Target Sentence</p>
+                    <p className="text-slate-900 text-lg font-medium">"{recommendedTask.target_sentence}"</p>
                  </div>
                </div>
              ) : (
-                <div className="glass rounded-3xl p-6 border border-slate-700/50 text-center text-slate-400">
+                <div className="bg-white rounded-xl p-6 border border-slate-200 text-center text-slate-500 shadow-sm">
                    Loading recommended task...
                 </div>
              )
           ) : (
-             <div className="glass rounded-3xl p-6 border border-slate-700/50">
-               <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                 <Type size={20} className="text-blue-400" />
+             <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
+               <h3 className="text-lg font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                 <Type size={18} className="text-blue-500" />
                  Custom Target Text
                </h3>
                <textarea
-                 className="w-full bg-slate-800/50 border border-slate-700 text-white rounded-xl p-4 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none h-32"
+                 className="w-full bg-white border border-slate-300 text-slate-900 rounded-lg p-4 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none h-32 text-sm"
                  placeholder="Enter any sentence you want to practice..."
                  value={targetText}
                  onChange={(e) => setTargetText(e.target.value)}
@@ -258,22 +258,22 @@ export default function Analyze() {
              </div>
           )}
 
-          <div className="glass rounded-3xl p-6 border border-slate-700/50">
+          <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                <FileAudio size={20} className="text-blue-400" />
+              <h3 className="text-lg font-semibold text-slate-900 flex items-center gap-2">
+                <FileAudio size={18} className="text-blue-500" />
                 Audio Input
               </h3>
-              <div className="flex bg-slate-800 rounded-lg p-1">
+              <div className="flex bg-slate-100 rounded-lg p-1 border border-slate-200">
                 <button 
                   onClick={() => setInputMode("upload")} 
-                  className={`px-3 py-1 text-sm rounded-md transition-colors ${inputMode === "upload" ? "bg-blue-600 text-white" : "text-slate-400 hover:text-white"}`}
+                  className={`px-3 py-1 text-xs font-medium rounded transition-colors ${inputMode === "upload" ? "bg-white text-slate-800 shadow-sm" : "text-slate-500 hover:text-slate-700"}`}
                 >
                   Upload
                 </button>
                 <button 
                   onClick={() => setInputMode("record")} 
-                  className={`px-3 py-1 text-sm rounded-md transition-colors ${inputMode === "record" ? "bg-blue-600 text-white" : "text-slate-400 hover:text-white"}`}
+                  className={`px-3 py-1 text-xs font-medium rounded transition-colors ${inputMode === "record" ? "bg-white text-slate-800 shadow-sm" : "text-slate-500 hover:text-slate-700"}`}
                 >
                   Record
                 </button>
@@ -282,39 +282,39 @@ export default function Analyze() {
 
             {inputMode === "upload" ? (
               <div 
-                className="border-2 border-dashed border-slate-600 rounded-2xl flex flex-col items-center justify-center p-8 text-center cursor-pointer hover:border-blue-500 hover:bg-slate-800/30 transition-all group"
+                className="border-2 border-dashed border-slate-300 rounded-lg flex flex-col items-center justify-center p-8 text-center cursor-pointer hover:border-blue-500 hover:bg-slate-50 transition-all group"
                 onClick={() => fileInputRef.current?.click()}
               >
                 <input type="file" accept="audio/wav" className="hidden" ref={fileInputRef} onChange={handleFileChange} />
-                <div className="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mb-4 group-hover:bg-blue-600/20 group-hover:text-blue-400 transition-all">
-                  <UploadCloud size={28} className="text-slate-400 group-hover:text-blue-400" />
+                <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mb-3 group-hover:bg-blue-50 transition-all">
+                  <UploadCloud size={24} className="text-slate-400 group-hover:text-blue-500" />
                 </div>
-                <p className="text-slate-400 text-sm">{file ? file.name : "Click to select .wav file"}</p>
+                <p className="text-slate-600 text-sm">{file ? file.name : "Click to select .wav file"}</p>
               </div>
             ) : (
-              <div className="border-2 border-slate-700 bg-slate-800/30 rounded-2xl flex flex-col items-center justify-center p-8 text-center">
+              <div className="border border-slate-200 bg-slate-50 rounded-lg flex flex-col items-center justify-center p-8 text-center">
                 {!isRecording ? (
                   <button 
                     onClick={startRecording}
-                    className="w-16 h-16 bg-red-500/20 text-red-500 hover:bg-red-500 hover:text-white rounded-full flex items-center justify-center transition-all border border-red-500/50 hover:shadow-[0_0_15px_rgba(239,68,68,0.5)] mb-4"
+                    className="w-14 h-14 bg-white text-red-500 hover:bg-red-50 rounded-full flex items-center justify-center transition-all border border-red-200 shadow-sm mb-4"
                   >
-                    <Mic size={28} />
+                    <Mic size={24} />
                   </button>
                 ) : (
                   <button 
                     onClick={stopRecording}
-                    className="w-16 h-16 bg-red-600 text-white rounded-full flex items-center justify-center transition-all animate-pulse shadow-[0_0_20px_rgba(239,68,68,0.6)] mb-4"
+                    className="w-14 h-14 bg-red-500 text-white rounded-full flex items-center justify-center transition-all animate-pulse shadow-md mb-4"
                   >
-                    <Square size={24} fill="currentColor" />
+                    <Square size={20} fill="currentColor" />
                   </button>
                 )}
                 
                 {isRecording ? (
-                  <p className="text-red-400 font-mono text-lg">{formatTime(recordingTime)}</p>
+                  <p className="text-red-500 font-mono text-lg">{formatTime(recordingTime)}</p>
                 ) : file ? (
-                  <p className="text-green-400 text-sm flex items-center gap-2"><Sparkles size={16}/> Recording Ready ({file.size > 1024 * 1024 ? (file.size / (1024 * 1024)).toFixed(2) + ' MB' : (file.size / 1024).toFixed(1) + ' KB'})</p>
+                  <p className="text-emerald-600 text-sm flex items-center gap-2"><Sparkles size={16}/> Recording Ready ({file.size > 1024 * 1024 ? (file.size / (1024 * 1024)).toFixed(2) + ' MB' : (file.size / 1024).toFixed(1) + ' KB'})</p>
                 ) : (
-                  <p className="text-slate-400 text-sm">Click the microphone to start recording</p>
+                  <p className="text-slate-500 text-sm">Click the microphone to start recording</p>
                 )}
               </div>
             )}
@@ -322,16 +322,16 @@ export default function Analyze() {
             <button
               onClick={handleUpload}
               disabled={!file || loading || isRecording || !targetText}
-              className="mt-6 w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl hover:from-blue-500 hover:to-indigo-500 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+              className="mt-6 w-full py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2 shadow-sm text-sm"
             >
               {loading ? (
-                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
               ) : (
-                <><Play size={20} /> Analyze Speech</>
+                <><Play size={16} /> Analyze Speech</>
               )}
             </button>
             
-            {error && <p className="mt-4 text-red-400 text-sm text-center">{error}</p>}
+            {error && <p className="mt-4 text-red-500 text-sm text-center">{error}</p>}
           </div>
         </div>
 
@@ -386,15 +386,15 @@ export default function Analyze() {
           )}
 
           {loading || storeLoading ? (
-            <div className="glass rounded-3xl p-12 border border-slate-700/50 flex flex-col items-center justify-center h-full min-h-[400px]">
+            <div className="bg-white rounded-xl p-12 border border-slate-200 flex flex-col items-center justify-center h-full min-h-[400px] shadow-sm">
               <div className="w-full max-w-md">
-                <div className="flex justify-between text-slate-300 mb-2">
-                  <span className="flex items-center gap-2"><Activity size={18} className="animate-pulse text-blue-400"/> {loading ? progress.step : "Loading workspace..."}</span>
+                <div className="flex justify-between text-slate-500 text-sm mb-2 font-medium">
+                  <span className="flex items-center gap-2"><Activity size={16} className="animate-pulse text-blue-500"/> {loading ? progress.step : "Loading workspace..."}</span>
                   <span>{loading ? progress.percent : 100}%</span>
                 </div>
-                <div className="w-full bg-slate-800 rounded-full h-3 overflow-hidden border border-slate-700">
+                <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
                   <div 
-                    className="bg-gradient-to-r from-blue-500 to-indigo-500 h-3 rounded-full transition-all duration-300 ease-out" 
+                    className="bg-blue-500 h-2 rounded-full transition-all duration-300 ease-out" 
                     style={{ width: `${loading ? progress.percent : 100}%` }}
                   ></div>
                 </div>
@@ -405,9 +405,9 @@ export default function Analyze() {
               <AnalysisResultView data={currentAnalysis} />
             </ErrorBoundary>
           ) : (
-            <div className="glass rounded-3xl p-12 border border-slate-700/50 flex flex-col items-center justify-center h-full min-h-[400px] text-slate-500">
-              <Sparkles size={48} className="mb-4 opacity-20" />
-              <p>Results will appear here after analysis.</p>
+            <div className="bg-white rounded-xl p-12 border border-slate-200 flex flex-col items-center justify-center h-full min-h-[400px] text-slate-400 shadow-sm">
+              <Sparkles size={32} className="mb-3 opacity-20 text-slate-500" />
+              <p className="text-sm">Results will appear here after analysis.</p>
             </div>
           )}
         </div>
