@@ -4,6 +4,7 @@ import { UploadCloud, FileAudio, Play, Type, Sparkles, Activity, Plus, Mic, Squa
 import { analyzeAudioStream } from "../api/analyze";
 import { getRecommendedTask, completeTask } from "../api/tasks";
 import AnalysisResultView from "../components/analysis/AnalysisResultView";
+import ErrorBoundary from "../components/ErrorBoundary";
 import { useAnalysisStore } from "../store/useAnalysisStore";
 import { useParams, useNavigate } from "react-router-dom";
 import { webmBlobToWavFile } from "../utils/audio";
@@ -400,7 +401,9 @@ export default function Analyze() {
               </div>
             </div>
           ) : currentAnalysis ? (
-            <AnalysisResultView data={currentAnalysis} />
+            <ErrorBoundary>
+              <AnalysisResultView data={currentAnalysis} />
+            </ErrorBoundary>
           ) : (
             <div className="glass rounded-3xl p-12 border border-slate-700/50 flex flex-col items-center justify-center h-full min-h-[400px] text-slate-500">
               <Sparkles size={48} className="mb-4 opacity-20" />
