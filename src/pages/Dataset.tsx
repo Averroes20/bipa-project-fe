@@ -175,7 +175,7 @@ export default function Dataset() {
         </div>
       )}
 
-      <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm mb-8">
+      <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)] mb-8">
         <div className="flex gap-4 mb-6">
           <input
             type="text"

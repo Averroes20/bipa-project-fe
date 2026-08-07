@@ -37,17 +37,17 @@ export default function Analytics() {
       {loading || !data ? (
         <div className="animate-pulse space-y-6">
            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="h-[350px] bg-white border border-slate-200 shadow-sm rounded-2xl lg:col-span-1"></div>
-              <div className="h-[350px] bg-white border border-slate-200 shadow-sm rounded-2xl lg:col-span-2"></div>
+              <div className="h-[350px] bg-white border border-slate-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)] rounded-2xl lg:col-span-1"></div>
+              <div className="h-[350px] bg-white border border-slate-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)] rounded-2xl lg:col-span-2"></div>
            </div>
-           <div className="h-64 bg-white border border-slate-200 shadow-sm rounded-2xl w-full"></div>
+           <div className="h-64 bg-white border border-slate-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)] rounded-2xl w-full"></div>
         </div>
       ) : (
         <div className="space-y-6">
           
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
              {/* Speech Ability Radar */}
-             <div className="lg:col-span-1 bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col items-center">
+             <div className="lg:col-span-1 bg-white rounded-2xl p-6 border border-slate-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)] flex flex-col items-center">
                 <h3 className="text-lg font-semibold text-slate-900 mb-2 w-full text-left">Speech Ability Radar</h3>
                 <div className="h-[280px] w-full">
                    <ResponsiveContainer width="100%" height="100%">
@@ -55,8 +55,8 @@ export default function Analytics() {
                          <PolarGrid stroke="#e2e8f0" />
                          <PolarAngleAxis dataKey="dimension" tick={{ fill: '#64748b', fontSize: 12 }} />
                          <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
-                         <Radar name="Native Reference" dataKey="Native Reference" stroke="#10b981" fill="#10b981" fillOpacity={0.3} />
-                         <Radar name="You" dataKey="You" stroke="#3b82f6" fill="#3b82f6" fillOpacity={0.6} />
+                         <Radar name="Native Reference" dataKey="Native Reference" stroke="#14b8a6" fill="#14b8a6" fillOpacity={0.3} />
+                         <Radar name="You" dataKey="You" stroke="#6366f1" fill="#6366f1" fillOpacity={0.6} />
                          <Tooltip contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '8px' }} itemStyle={{ color: '#0f172a' }} />
                          <Legend wrapperStyle={{ fontSize: 12, paddingTop: '10px', color: '#64748b' }} />
                       </RadarChart>
@@ -67,7 +67,7 @@ export default function Analytics() {
              {/* Dimension Comparisons */}
              <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
                  {["pronunciation", "fluency", "intonation", "clarity"].map((dim) => (
-                    <div key={dim} className="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                    <div key={dim} className="bg-white rounded-2xl p-5 border border-slate-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
                       <h3 className="text-base font-semibold text-slate-900 mb-2 capitalize">{dim} Comparison</h3>
                       <div className="h-[140px] w-full">
                         <ResponsiveContainer width="100%" height="100%">
@@ -77,8 +77,8 @@ export default function Analytics() {
                             <YAxis domain={[0, 100]} stroke="#cbd5e1" tick={{ fill: '#64748b', fontSize: 11 }} width={30} axisLine={false} tickLine={false} />
                             <Tooltip contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', fontSize: 12, borderRadius: '8px' }} itemStyle={{ color: '#0f172a' }} cursor={{fill: '#f8fafc'}} />
                             <Legend wrapperStyle={{ fontSize: 11, paddingTop: '5px', color: '#64748b' }} />
-                            <Bar dataKey="You" fill="#3b82f6" radius={[4, 4, 0, 0]} barSize={20} />
-                            <Bar dataKey="Native Male" fill="#10b981" radius={[4, 4, 0, 0]} barSize={20} />
+                            <Bar dataKey="You" fill="#6366f1" radius={[4, 4, 0, 0]} barSize={20} />
+                            <Bar dataKey="Native Male" fill="#14b8a6" radius={[4, 4, 0, 0]} barSize={20} />
                             <Bar dataKey="Native Female" fill="#8b5cf6" radius={[4, 4, 0, 0]} barSize={20} />
                           </BarChart>
                         </ResponsiveContainer>
@@ -113,29 +113,38 @@ export default function Analytics() {
              {/* Phonetics Analytics */}
              <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
                  {/* Word Analytics */}
-                 <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
-                    <h3 className="text-lg font-semibold text-slate-900 mb-4 flex items-center gap-2">
-                        <MessageSquare size={18} className="text-emerald-500" /> Word Analytics
-                    </h3>
-                    {data.wordStatistics?.length > 0 ? (
-                        <div className="space-y-3">
-                            {data.wordStatistics.map((w: any, idx: number) => (
-                                <div key={idx} className="flex justify-between items-center bg-slate-50 rounded-lg px-4 py-2 border border-slate-100">
-                                    <span className="text-slate-800 font-medium">{w.word}</span>
-                                    <div className="text-right">
-                                        <div className="text-xs text-slate-500">{w.frequency} errors</div>
-                                        <div className="text-sm font-semibold text-red-500">{w.accuracy}% acc</div>
-                                    </div>
+                 <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+                     <h3 className="text-lg font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                         <MessageSquare size={18} className="text-emerald-500" /> Word Analytics
+                     </h3>
+                     {data.wordStatistics?.length > 0 ? (
+                         <div className="space-y-1">
+                             <div className="flex justify-between items-center px-4 py-2 text-xs font-semibold text-slate-400 uppercase tracking-wider border-b border-slate-100">
+                                <span>Word</span>
+                                <div className="flex w-32 justify-between">
+                                    <span>Errors</span>
+                                    <span>Accuracy</span>
                                 </div>
-                            ))}
-                        </div>
-                    ) : (
-                        <p className="text-slate-500 italic text-sm">Not enough data collected yet.</p>
-                    )}
+                             </div>
+                             {data.wordStatistics.map((w: any, idx: number) => (
+                                 <div key={idx} className="flex justify-between items-center px-4 py-3 border-b border-slate-50 last:border-0 hover:bg-slate-50 transition-colors">
+                                     <span className="text-slate-800 font-medium text-sm">{w.word}</span>
+                                     <div className="flex w-32 justify-between items-center">
+                                         <div className="text-sm text-slate-500">{w.frequency}</div>
+                                         <div className={`text-sm font-semibold px-2 py-0.5 rounded-md ${w.accuracy > 80 ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-500'}`}>
+                                            {w.accuracy}%
+                                         </div>
+                                     </div>
+                                 </div>
+                             ))}
+                         </div>
+                     ) : (
+                         <p className="text-slate-500 italic text-sm">Not enough data collected yet.</p>
+                     )}
                  </div>
 
                  {/* Vowel & Phoneme Analytics */}
-                 <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm h-full flex flex-col">
+                 <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)] h-full flex flex-col">
                     <h3 className="text-lg font-semibold text-slate-900 mb-4 flex items-center gap-2">
                         <Languages size={18} className="text-purple-500" /> Phonetic Deviations
                     </h3>

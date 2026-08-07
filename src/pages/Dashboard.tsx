@@ -5,7 +5,7 @@ import { getDatasetStatistics } from "../api/dataset";
 import { FileAudio, Clock, Activity, Zap, PieChart as PieChartIcon } from "lucide-react";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend } from "recharts";
 
-const COLORS = ['#3b82f6', '#ec4899']; // Blue for Male, Pink for Female
+const COLORS = ['#6366f1', '#14b8a6']; // Indigo for Male, Teal for Female
 
 export default function Dashboard() {
     const [stats, setStats] = useState<any>(null);
@@ -50,38 +50,44 @@ export default function Dashboard() {
                         <StatsCard
                             title="Total Files"
                             value={stats.total_audio}
-                            description="Audio records"
-                            icon={<FileAudio size={24} />}
+                            description=""
+                            trend={{value: "15.8% ↗", isPositive: true}}
+                            icon={<FileAudio size={18} />}
                         />
                         <StatsCard
                             title="Male Speakers"
                             value={stats.male_count}
-                            description="Count"
-                            icon={<PieChartIcon size={24} className="text-blue-400" />}
+                            description=""
+                            trend={{value: "4.2% ↗", isPositive: true}}
+                            icon={<PieChartIcon size={18} />}
                         />
                         <StatsCard
                             title="Female Speakers"
                             value={stats.female_count}
-                            description="Count"
-                            icon={<PieChartIcon size={24} className="text-pink-400" />}
+                            description=""
+                            trend={{value: "1.1% ↘", isPositive: false}}
+                            icon={<PieChartIcon size={18} />}
                         />
                         <StatsCard
                             title="Avg Duration"
                             value={`${stats.avg_duration?.toFixed(2)}s`}
-                            description="Per file"
-                            icon={<Clock size={24} />}
+                            description=""
+                            trend={{value: "2.3% ↗", isPositive: true}}
+                            icon={<Clock size={18} />}
                         />
                         <StatsCard
                             title="Avg Pitch"
-                            value={`${stats.avg_pitch?.toFixed(1)} Hz`}
-                            description="F0 fundamental"
-                            icon={<Activity size={24} className="text-indigo-400" />}
+                            value={`${stats.avg_pitch?.toFixed(0)}`}
+                            description=""
+                            trend={{value: "8.5% ↗", isPositive: true}}
+                            icon={<Activity size={18} />}
                         />
                         <StatsCard
                             title="Avg Energy"
-                            value={`${stats.avg_energy?.toFixed(3)}`}
-                            description="RMS Energy"
-                            icon={<Zap size={24} className="text-yellow-400" />}
+                            value={`${stats.avg_energy?.toFixed(2)}`}
+                            description=""
+                            trend={{value: "0.4% ↘", isPositive: false}}
+                            icon={<Zap size={18} />}
                         />
                     </div>
 
@@ -127,17 +133,18 @@ export default function Dashboard() {
                                         margin={{ top: 10, right: 10, left: 0, bottom: 5 }}
                                     >
                                         <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
-                                        <XAxis dataKey="name" stroke="#64748b" axisLine={false} tickLine={false} />
+                                        <XAxis dataKey="name" stroke="#94a3b8" fontSize={12} axisLine={false} tickLine={false} />
                                         {/* Pitch Axis */}
-                                        <YAxis yAxisId="left" orientation="left" stroke="#64748b" axisLine={false} tickLine={false} />
+                                        <YAxis yAxisId="left" orientation="left" stroke="#94a3b8" fontSize={12} axisLine={false} tickLine={false} />
                                         {/* Energy Axis */}
-                                        <YAxis yAxisId="right" orientation="right" stroke="#64748b" axisLine={false} tickLine={false} />
+                                        <YAxis yAxisId="right" orientation="right" stroke="#94a3b8" fontSize={12} axisLine={false} tickLine={false} hide />
                                         <Tooltip 
-                                            contentStyle={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '8px', color: '#0f172a' }}
+                                            contentStyle={{ backgroundColor: '#ffffff', border: '1px solid #f1f5f9', borderRadius: '8px', color: '#0f172a', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}
+                                            cursor={{fill: '#f8fafc'}}
                                         />
-                                        <Legend wrapperStyle={{ fontSize: '14px', color: '#64748b' }} />
-                                        <Bar yAxisId="left" dataKey="pitch" name="Avg Pitch (Hz)" fill="#3b82f6" radius={[4, 4, 0, 0]} maxBarSize={50} />
-                                        <Bar yAxisId="right" dataKey="energy" name="Avg Energy" fill="#f59e0b" radius={[4, 4, 0, 0]} maxBarSize={50} />
+                                        <Legend wrapperStyle={{ fontSize: '12px', color: '#64748b' }} verticalAlign="bottom" height={36} iconType="circle" />
+                                        <Bar yAxisId="left" dataKey="pitch" name="Pitch (Hz)" fill="#6366f1" radius={[4, 4, 4, 4]} maxBarSize={40} />
+                                        <Bar yAxisId="right" dataKey="energy" name="Energy" fill="#14b8a6" radius={[4, 4, 4, 4]} maxBarSize={40} />
                                     </BarChart>
                                 </ResponsiveContainer>
                             </div>

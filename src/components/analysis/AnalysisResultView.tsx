@@ -54,8 +54,8 @@ export default function AnalysisResultView({ data }: Props) {
 
   const comparisonData = [
     { name: "Native Female", score: Math.round((data.similarity?.female || 0) * 100), fill: "#8b5cf6" },
-    { name: "Native Male", score: Math.round((data.similarity?.male || 0) * 100), fill: "#3b82f6" },
-    { name: "You", score: Math.round(data.overall_score), fill: "#f59e0b" },
+    { name: "Native Male", score: Math.round((data.similarity?.male || 0) * 100), fill: "#14b8a6" },
+    { name: "You", score: Math.round(data.overall_score), fill: "#6366f1" },
   ];
 
   // Phonemes for selected word
@@ -105,7 +105,7 @@ export default function AnalysisResultView({ data }: Props) {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* 3. NATIVE COMPARISON */}
-        <div className="lg:col-span-1 bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col">
+        <div className="lg:col-span-1 bg-white rounded-2xl p-6 border border-slate-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)] flex flex-col">
           <h3 className="text-lg font-semibold text-slate-900 mb-4 flex items-center gap-2">
             <User size={18} className="text-blue-500" />
             Native Speaker Comparison
@@ -130,7 +130,7 @@ export default function AnalysisResultView({ data }: Props) {
         </div>
 
         {/* 4. FEATURE INTERPRETATION */}
-        <div className="lg:col-span-2 bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+        <div className="lg:col-span-2 bg-white rounded-2xl p-6 border border-slate-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
            <h3 className="text-lg font-semibold text-slate-900 mb-4 flex items-center gap-2">
             <Activity size={18} className="text-emerald-500" />
             Acoustic Feature Analysis
@@ -174,7 +174,7 @@ export default function AnalysisResultView({ data }: Props) {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* 5. WORD ALIGNMENT & TIMELINE */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col">
+        <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)] flex flex-col">
           <h3 className="text-lg font-semibold text-slate-900 mb-2 flex items-center gap-2">
             <Mic size={18} className="text-blue-500" />
             Word Alignment & Timeline
@@ -231,7 +231,7 @@ export default function AnalysisResultView({ data }: Props) {
         </div>
 
         {/* 6. PHONEME ANALYSIS FOR SELECTED WORD */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+        <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
            <h3 className="text-lg font-semibold text-slate-900 mb-6 flex items-center gap-2">
             <ListMusic size={18} className="text-purple-500" />
             Phoneme Analysis
@@ -287,7 +287,7 @@ export default function AnalysisResultView({ data }: Props) {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* 7. PITCH CONTOUR */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+        <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
           <h3 className="text-lg font-semibold text-slate-900 mb-2 flex items-center gap-2">
             <Music size={18} className="text-purple-500" />
             Pitch Contour (Intonation)
@@ -304,9 +304,9 @@ export default function AnalysisResultView({ data }: Props) {
                   <YAxis domain={['auto', 'auto']} stroke="#64748b" axisLine={false} tickLine={false} tick={{fontSize: 12}} />
                   <Tooltip contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '8px', color: '#0f172a' }} />
                   <Legend verticalAlign="top" height={36} wrapperStyle={{ fontSize: '13px', color: '#64748b' }} />
-                  <Line name="You" type="monotone" dataKey="user" stroke="#f59e0b" strokeWidth={3} dot={false} connectNulls />
-                  <Line name="Native Female" type="monotone" dataKey="female" stroke="#8b5cf6" strokeWidth={2} strokeDasharray="5 5" dot={false} connectNulls />
-                  <Line name="Native Male" type="monotone" dataKey="male" stroke="#3b82f6" strokeWidth={2} strokeDasharray="5 5" dot={false} connectNulls />
+                  <Line type="monotone" dataKey="user" name="You" stroke="#6366f1" strokeWidth={2} dot={false} connectNulls />
+                  <Line type="monotone" dataKey="male" name="Native Male" stroke="#14b8a6" strokeWidth={2} strokeDasharray="5 5" dot={false} connectNulls />
+                  <Line type="monotone" dataKey="female" name="Native Female" stroke="#8b5cf6" strokeWidth={2} strokeDasharray="5 5" dot={false} connectNulls />
                 </LineChart>
               </ResponsiveContainer>
             ) : (
@@ -316,7 +316,7 @@ export default function AnalysisResultView({ data }: Props) {
         </div>
 
         {/* 8. FORMANT SCATTER (VOWEL SPACE) */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+        <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
           <h3 className="text-lg font-semibold text-slate-900 mb-2 flex items-center gap-2">
             <Activity size={18} className="text-orange-500" />
             Vowel Space (F1 vs F2)
@@ -327,21 +327,20 @@ export default function AnalysisResultView({ data }: Props) {
                <ResponsiveContainer width="100%" height="100%">
                  <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
                    <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-                   {/* Reversed Y for F1 (height) and Reversed X for F2 (backness) */}
                    <YAxis type="number" dataKey="f1" name="F1 (Height)" reversed domain={['auto', 'auto']} stroke="#64748b" axisLine={false} tickLine={false} tick={{fontSize: 12}} />
                    <XAxis type="number" dataKey="f2" name="F2 (Backness)" reversed domain={['auto', 'auto']} stroke="#64748b" axisLine={false} tickLine={false} tick={{fontSize: 12}} />
                    <ZAxis range={[100, 100]} />
                    <Tooltip cursor={{ strokeDasharray: '3 3' }} contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', borderRadius: '8px', color: '#0f172a' }} />
                    <Legend verticalAlign="top" height={36} wrapperStyle={{ fontSize: '13px', color: '#64748b' }} />
-                   <Scatter name="Your Voice" data={formantData} fill="#f97316">
-                     <LabelList dataKey="name" position="top" fill="#ea580c" fontSize={14} fontWeight="bold" />
-                   </Scatter>
-                   <Scatter name="Native Male" data={nativeMaleData} fill="#3b82f6" shape="cross">
-                     <LabelList dataKey="name" position="bottom" fill="#2563eb" fontSize={12} />
-                   </Scatter>
-                   <Scatter name="Native Female" data={nativeFemaleData} fill="#8b5cf6" shape="diamond">
-                     <LabelList dataKey="name" position="bottom" fill="#7c3aed" fontSize={12} />
-                   </Scatter>
+                   <Scatter name="You" data={formantData} fill="#6366f1">
+                    <LabelList dataKey="name" position="top" fill="#64748b" fontSize={11} />
+                  </Scatter>
+                  <Scatter name="Native Male" data={nativeMaleData} fill="#14b8a6" shape="triangle">
+                    <LabelList dataKey="name" position="bottom" fill="#94a3b8" fontSize={10} />
+                  </Scatter>
+                  <Scatter name="Native Female" data={nativeFemaleData} fill="#8b5cf6" shape="diamond">
+                    <LabelList dataKey="name" position="right" fill="#94a3b8" fontSize={10} />
+                  </Scatter>
                  </ScatterChart>
                </ResponsiveContainer>
              ) : (
@@ -354,7 +353,7 @@ export default function AnalysisResultView({ data }: Props) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
          {/* 9. ARTICULATION & ACCENT */}
          <div className="space-y-6">
-            <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+            <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
                <h3 className="text-lg font-semibold text-slate-900 mb-6 flex items-center gap-2">
                  <Mic size={18} className="text-teal-500" />
                  Articulation Quality
@@ -376,7 +375,7 @@ export default function AnalysisResultView({ data }: Props) {
                </div>
             </div>
             
-            <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+            <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
                <h3 className="text-lg font-semibold text-slate-900 mb-4 flex items-center gap-2">
                  <Activity size={18} className="text-indigo-500" />
                  Accent & Rhythm
@@ -391,7 +390,7 @@ export default function AnalysisResultView({ data }: Props) {
          </div>
 
         {/* 10. AI TEACHER RECOMMENDATIONS */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col">
+        <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)] flex flex-col">
           <h3 className="text-lg font-semibold text-slate-900 mb-6 flex items-center gap-2">
             <ThumbsUp size={18} className="text-green-500" />
             AI Teacher

@@ -49,7 +49,7 @@ export default function Register() {
       
       <div className="w-full max-w-md z-10 px-6">
           <div className="mb-8 text-center">
-              <div className="inline-flex items-center justify-center p-3 bg-white border border-slate-200 rounded-2xl mb-4 shadow-sm">
+              <div className="inline-flex items-center justify-center p-3 bg-white border border-slate-100 rounded-2xl mb-4 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
                   <Sparkles className="text-purple-600" size={32} />
               </div>
               <h1 className="text-3xl font-bold text-slate-900 mb-2 tracking-tight">

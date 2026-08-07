@@ -244,7 +244,7 @@ export default function Analyze() {
                 </div>
              )
           ) : (
-             <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
+             <div className="bg-white rounded-xl p-6 border border-slate-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
                <h3 className="text-lg font-semibold text-slate-900 mb-4 flex items-center gap-2">
                  <Type size={18} className="text-blue-500" />
                  Custom Target Text
@@ -258,7 +258,7 @@ export default function Analyze() {
              </div>
           )}
 
-          <div className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm">
+          <div className="bg-white rounded-xl p-6 border border-slate-100 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold text-slate-900 flex items-center gap-2">
                 <FileAudio size={18} className="text-blue-500" />
