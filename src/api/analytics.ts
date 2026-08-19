@@ -5,13 +5,13 @@ export async function getDashboardSummary() {
   return response.data;
 }
 
-export async function getFullDashboardAnalytics() {
-  const response = await client.get("/analytics/dashboard");
+export async function getFullDashboardAnalytics(period: string = "all") {
+  const response = await client.get(`/analytics/dashboard?period=${period}`);
   return response.data;
 }
 
-export async function getPhoneticDeviations() {
-  const response = await client.get("/analytics/phonetic-deviations");
+export async function getPhoneticDeviations(period: string = "all") {
+  const response = await client.get(`/analytics/phonetic-deviations?period=${period}`);
   return response.data;
 }
 
@@ -30,8 +30,8 @@ export async function getGlobalAnalytics() {
   return response.data;
 }
 
-export async function getComparisonAnalytics() {
-  const response = await client.get("/analytics/comparison");
+export async function getComparisonAnalytics(period: string = "all") {
+  const response = await client.get(`/analytics/comparison?period=${period}`);
   return response.data;
 }
 
