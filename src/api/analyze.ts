@@ -7,7 +7,7 @@ export interface WordAnalysis {
   duration: number;
   confidence: number;
   score: number;
-  status: 'correct' | 'warning' | 'error';
+  status: 'correct' | 'needs_improvement' | 'error';
 }
 
 export interface PhonemeAnalysis {
@@ -17,15 +17,44 @@ export interface PhonemeAnalysis {
   duration: number;
   confidence: number;
   score: number;
-  error_type?: string;
-  expected?: string;
-  detected?: string;
-  feedback?: string;
+  status: 'good' | 'acceptable' | 'weak';
+  feedback: string;
 }
 
-export interface AnalysisRecommendation {
-  type: string;
-  message: string;
+export interface TeacherFeedback {
+  strengths: string[];
+  focus: string[];
+  practice: string[];
+}
+
+export interface PitchInsight {
+  pattern: 'rising' | 'falling' | 'flat' | 'overshoot';
+  terminal_drop_hz: number;
+  native_drop_hz: number;
+  difference_hz: number;
+  summary: string;
+  recommendation: string;
+}
+
+export interface Playback {
+  user: string;
+  male: string;
+  female: string;
+}
+
+export interface VowelData {
+  phoneme: string;
+  user: { f1: number; f2: number };
+  native_male: { f1: number; f2: number };
+  native_female: { f1: number; f2: number };
+  match: number;
+}
+
+export interface VowelEllipse {
+  phoneme: string;
+  center: { f1: number; f2: number };
+  radius_f1: number;
+  radius_f2: number;
 }
 
 export interface AnalysisResponse {
@@ -66,11 +95,10 @@ export interface AnalysisResponse {
     timeline: { start: number; end: number; duration: number }[];
   };
   phonetics: {
-    vowel_space: { vowel: string; f1: number | null; f2: number | null; distance_male: number; distance_female: number; accuracy: number }[];
-    native_male_space?: Record<string, { f1: number; f2: number }>;
-    native_female_space?: Record<string, { f1: number; f2: number }>;
-    formants?: { F1: number; F2: number; F3: number };
-    vowels: { vowel: string; accuracy: number }[];
+    vowel_space: {
+      vowels: VowelData[];
+      ellipse: VowelEllipse[];
+    };
   };
   articulation: {
     zcr: number | null;
@@ -98,8 +126,10 @@ export interface AnalysisResponse {
     male_similarity: number;
     female_similarity: number;
     preferred_reference: string;
+    pitch_insight?: PitchInsight;
   };
-  recommendation: AnalysisRecommendation[];
+  teacher: TeacherFeedback;
+  playback: Playback;
 }
 
 export async function analyzeAudioStream(
@@ -114,7 +144,7 @@ export async function analyzeAudioStream(
   // Use native fetch to read stream
   const token = localStorage.getItem("token");
   const baseUrl = client.defaults.baseURL || "http://localhost:8000";
-  
+
   const response = await fetch(`${baseUrl}/analyze`, {
     method: "POST",
     headers: {
@@ -134,7 +164,7 @@ export async function analyzeAudioStream(
 
   const reader = response.body?.getReader();
   const decoder = new TextDecoder("utf-8");
-  
+
   if (!reader) {
     throw new Error("Streaming not supported by browser");
   }
@@ -146,14 +176,13 @@ export async function analyzeAudioStream(
     if (done) break;
 
     const chunk = decoder.decode(value, { stream: true });
-    // Split by newlines as SSE sends data chunks ending with \n\n
     const lines = chunk.split("\n");
-    
+
     for (const line of lines) {
       if (line.startsWith("data: ")) {
         const jsonStr = line.substring(6).trim();
         if (!jsonStr) continue;
-        
+
         try {
           const data = JSON.parse(jsonStr);
           if (data.status === "progress") {
